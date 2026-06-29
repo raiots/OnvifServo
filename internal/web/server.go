@@ -11,6 +11,7 @@ import (
 
 	"onvif-servo-proxy/internal/config"
 	"onvif-servo-proxy/internal/servo"
+	"onvif-servo-proxy/internal/version"
 )
 
 type Server struct {
@@ -36,7 +37,7 @@ func (s *Server) index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	_ = page.Execute(w, s.cfg)
+	_ = page.Execute(w, pageData{Config: s.cfg, Version: version.Short()})
 }
 
 func (s *Server) configAPI(w http.ResponseWriter, r *http.Request) {
@@ -108,6 +109,11 @@ func writeJSON(w http.ResponseWriter, v any) {
 	}
 }
 
+type pageData struct {
+	config.Config
+	Version string
+}
+
 var page = template.Must(template.New("index").Parse(`<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -144,6 +150,9 @@ var page = template.Must(template.New("index").Parse(`<!doctype html>
     .viz svg { width: 100%; height: 210px; display: block; }
     .raw-panel { margin-top: 14px; }
     .control-visuals { margin-top: 16px; }
+    footer { max-width: 1180px; margin: 0 auto; padding: 0 24px 24px; color: var(--muted); font-size: 12px; text-align: center; }
+    footer a { color: var(--green); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
     .beam { transition: transform .25s ease; transform-origin: 110px 110px; }
     .tilt-beam { transition: transform .25s ease; transform-origin: 34px 110px; }
     @media (max-width: 860px) { main { grid-template-columns: 1fr; padding: 14px; } .row, .visual-grid { grid-template-columns: 1fr; } }
@@ -228,6 +237,7 @@ var page = template.Must(template.New("index").Parse(`<!doctype html>
     </div>
   </section>
 </main>
+<footer>Made in ❤️ with <a href="https://everains.com/" target="_blank" rel="noopener noreferrer">Raiot</a> and Codex · Version: {{.Version}}</footer>
 <script>
 let cfg = null;
 let lastStatus = null;
