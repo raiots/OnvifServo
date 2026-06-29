@@ -1,0 +1,50 @@
+{
+  "server": {
+    "bind": "0.0.0.0",
+    "port": 8080,
+    "public_host": "192.168.1.128",
+    "base_path": "/onvif",
+    "username": "admin",
+    "password": "admin",
+    "manufacturer": "OnvifServo",
+    "model": "Rock 3C Servo PTZ Proxy",
+    "firmware_version": "0.1.0",
+    "serial_number": "ONVIF-SERVO-001",
+    "hardware_id": "rock3c-esp32-gimbal"
+  },
+  "servo": {
+    "serial_device": "/dev/ttyS2",
+    "baud": 115200,
+    "configure_with_stty": true,
+    "pan_min": 0,
+    "pan_max": 270,
+    "pan_center": 135,
+    "tilt_min": 0,
+    "tilt_max": 180,
+    "tilt_center": 90,
+    "default_speed_dps": 90,
+    "command_timeout_ms": 900,
+    "relative_pan_degrees_per_unit": 30,
+    "relative_tilt_degrees_per_unit": 20,
+    "velocity_pan_dps": 90,
+    "velocity_tilt_dps": 60
+  },
+  "camera": {
+    "stream_uri": "rtsp://camera-ip/stream1",
+    "snapshot_uri": "",
+    "zoom_mode": "disabled",
+    "onvif_endpoint": "http://camera-ip/onvif/device_service",
+    "onvif_username": "admin",
+    "onvif_password": "password",
+    "http_zoom_in_url": "",
+    "http_zoom_out_url": "",
+    "http_zoom_stop_url": "",
+    "http_zoom_set_url": "",
+    "http_auth_header": "",
+    "hikvision_channel": 1,
+    "hikvision_zoom_speed": 60,
+    "zoom_min": 0,
+    "zoom_max": 1,
+    "zoom_default": 0
+  }
+}

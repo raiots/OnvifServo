@@ -1,0 +1,16 @@
+[Unit]
+Description=ONVIF Servo PTZ Proxy
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=radxa
+Group=radxa
+SupplementaryGroups=dialout
+ExecStart=/home/radxa/Apps/onvif-servo-proxy -config /home/radxa/Apps/onvif-servo-proxy.json
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
