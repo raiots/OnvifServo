@@ -1,5 +1,7 @@
 # ONVIF Servo Proxy
 
+[中文](README.zh-CN.md) | English
+
 Rock 3C service that exposes an ONVIF PTZ camera facade for Frigate while splitting PTZ commands across:
 
 - pan/tilt: UART commands to the ESP32 MicroPython gimbal firmware in `firmware/`
